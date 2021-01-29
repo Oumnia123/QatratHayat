@@ -1,3 +1,5 @@
 *.css linguist-language=html
 *.html linguist-language=java
+*.scss linguist-language=css
+
 
