@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorator="layout/root_layout"
+      lang="fr">
+<head>
+   <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title> Les Campagnes de sensibilisation</title>
+<link rel="icon" href="img/favicon.png">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+
+<script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  
+<style type="text/css">
+		
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,300");
+
+
+
+.pagination-container {
+	margin 100px: auto;
+	text-align: center;
+        }
+
+.pagination a {
+		position :relative;
+		display :inline-block;
+		color :#2c3e50;
+		text-decoration: none;
+		font-size: 1.2rem;
+		padding: 8px 16px 10px;	
+	   border-radius: 24px;
+		
+		}			
+
+.pagination a:hover{
+			color: #fff;
+						background-color: crimson;
+				border-radius: 24px;
+				 -webkit-transition: all 2s ease;
+	             transform: scale(1);	
+			}
+         
+
+.fa {
+margin-right: 10px; 
+color: #f5345b;
+}
+.dropdown-item:hover{
+color:red;}
+li{
+margin-bottom: 12px;
+}
+
+body {
+  margin: 0;
+  font-family: "Lato", sans-serif;
+   color: #566787;
+  background: #f5f5f5;
+  font-family: 'Varela Round', sans-serif;
+  font-size: 13px;
+}
+
+.sidebar {
+  margin: 0;
+  padding: 0;
+  width: 200px;
+  background-color: #4116bb;
+  position: fixed;
+  height: 100%;
+  overflow: auto;
+}
+
+.sidebar a {
+  display: block;
+  color: white;
+  padding: 16px;
+  text-decoration: none;
+}
+ 
+.sidebar a.active {
+  background-color:rgb(252, 71, 71);
+  color: white;
+}
+
+.sidebar a:hover:not(.active) {
+  background-color: rgb(252, 71, 71);
+  color: white;
+}
+
+div.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px;
+}
+
+@media screen and (max-width: 700px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+@media screen and (max-width: 400px) {
+  .sidebar a {
+    text-align: center;
+    float: none;
+  }
+}
+
+
+
+
+
+ .table-wrapper {
+        background: #fff;
+        padding: 20px 25px;
+        margin: 30px 0;
+  border-radius:1px;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.247);
+    }
+ .table-title {        
+  padding-bottom: 15px;
+     background: linear-gradient(40deg, #ff4343, #ce3333) !important;
+  color: #fff;
+  padding: 16px 30px;
+  margin: -20px -25px 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.247);
+    }
+    .table-title h2 {
+  margin: 5px 0 0;
+  font-size: 24px;
+ }
+ .table-title .btn-group {
+  float: right;
+ }
+ .table-title .btn {
+  color: #fff;
+  float: right;
+  font-size: 13px;
+  border: none;
+  min-width: 50px;
+  border-radius: 1px;
+  border: none;
+  outline: none !important;
+  margin-left: 10px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.247);
+ }
+ .table-title .btn i {
+  float: left;
+  font-size: 21px;
+  margin-right: 5px;
+ }
+ .table-title .btn span {
+  float: left;
+  margin-top: 2px;
+ }
+    table.table tr th, table.table tr td {
+        border-color: #e9e9e9;
+  padding: 12px 15px;
+  vertical-align: middle;
+    }
+ table.table tr th:first-child {
+  width: 60px;
+ }
+ table.table tr th:last-child {
+  width: 100px;
+ }
+    table.table-striped tbody tr:nth-of-type(odd) {
+     background-color: #fcfcfc;
+ }
+ table.table-striped.table-hover tbody tr:hover {
+  background: #f5f5f5;
+ }
+    table.table th i {
+        font-size: 13px;
+        margin: 0 5px;
+        cursor: pointer;
+    } 
+    table.table td:last-child i {
+  opacity: 0.9;
+  font-size: 22px;
+        margin: 0 5px;
+    }
+ table.table td a {
+  font-weight: bold;
+  color: #566787;
+  display: inline-block;
+  text-decoration: none;
+  outline: none !important;
+ }
+ table.table td a:hover {
+  color: #2196F3;
+ }
+ table.table td a.edit {
+        color: #FFC107;
+    }
+    table.table td a.delete {
+        color: #F44336;
+    }
+    table.table td i {
+        font-size: 19px;
+    }
+ table.table .avatar {
+  border-radius: 1px;
+  vertical-align: middle;
+  margin-right: 10px;
+ }
+    
+    .hint-text {
+        float: left;
+        margin-top: 10px;
+        font-size: 13px;
+    }    
+ /* Custom checkbox */
+ .custom-checkbox {
+  position: relative;
+ }
+ .custom-checkbox input[type="checkbox"] {    
+  opacity: 0;
+  position: absolute;
+  margin: 5px 0 0 3px;
+  z-index: 9;
+ }
+ .custom-checkbox label:before{
+  width: 18px;
+  height: 18px;
+ }
+ .custom-checkbox label:before {
+  content: '';
+  margin-right: 10px;
+  display: inline-block;
+  vertical-align: text-top;
+  background: white;
+  border: 1px solid #bbb;
+  border-radius: 1px;
+  box-sizing: border-box;
+  z-index: 2;
+ }
+ .custom-checkbox input[type="checkbox"]:checked + label:after {
+  content: '';
+  position: absolute;
+  left: 6px;
+  top: 3px;
+  width: 6px;
+  height: 11px;
+  border: solid #000;
+  border-width: 0 3px 3px 0;
+  transform: inherit;
+  z-index: 3;
+  transform: rotateZ(45deg);
+ }
+ .custom-checkbox input[type="checkbox"]:checked + label:before {
+  border-color: #03A9F4;
+  background: #03A9F4;
+ }
+ .custom-checkbox input[type="checkbox"]:checked + label:after {
+  border-color: #fff;
+ }
+ .custom-checkbox input[type="checkbox"]:disabled + label:before {
+  color: #b8b8b8;
+  cursor: auto;
+  box-shadow: none;
+  background: #ddd;
+ }
+ /* Modal styles */
+ .modal .modal-dialog {
+  max-width: 400px;
+ }
+ .modal .modal-header, .modal .modal-body, .modal .modal-footer {
+  padding: 20px 30px;
+ }
+ .modal .modal-content {
+  border-radius: 1px;
+ }
+ .modal .modal-footer {
+  background: #ecf0f1;
+  border-radius: 0 0 1px 1px;
+ }
+    .modal .modal-title {
+        display: inline-block;
+    }
+ .modal .form-control {
+  border-radius: 1px;
+  box-shadow: none;
+  border-color: #dddddd;
+ }
+ .modal textarea.form-control {
+  resize: vertical;
+ }
+ .modal .btn {
+  border-radius: 1px;
+  min-width: 100px;
+ } 
+ .modal form label {
+  font-weight: normal;
+ } 
+</style>
+<script type="text/javascript">
+$(document).ready(function()
+{
+ // Activate tooltip
+ $('[data-toggle="tooltip"]').tooltip();
+ 
+ // Select/Deselect checkboxes
+ var checkbox = $('table tbody input[type="checkbox"]');
+ $("#selectAll").click(function()
+ {
+  if(this.checked){
+   checkbox.each(function()
+   {
+    this.checked = true;                        
+   });
+  }
+  else
+  {
+   checkbox.each(function()
+   {
+    this.checked = false;                        
+   });
+  } 
+ });
+ checkbox.click(function()
+ {
+  if(!this.checked)
+  {
+   $("#selectAll").prop("checked", false);
+  }
+ });
+});
+</script>
+
+</head>
+
+
+<body>
+
+
+<div class="sidebar">
+<section style ="background-color :white;">
+   <a href="/home"> <img src="/images/blodlogo.png"  alt="logo" width="180px;"></a>
+   </section>
+  <div sec:authorize="isAuthenticated()">
+      <a  href="/profile">
+      <img th:if="${ image != null}" th:src="@{${'/photo_de_profiles/' + image }}" class="avatar" alt="Avatar" width="20%" style="border-radius: 50%;"> 
+                                   		 
+       <img th:if="${ image == null}" src="/images/av.svg" class="avatar" alt="Avatar" width="20%" style="border-radius: 50%;"> 
+        <span class="username" th:text="${#authentication.getPrincipal().getUsername()}" >Guest
+        </span>
+      </a>
+  </div>
+  <a  href="/home"><img src ="/images/homecn.svg" width="12%" />  Acceuil</a>
+  <a  href="/all_annonce"><img src ="/images/anncn.svg" width="15%" />  Annonces </a>
+  <a class="active" href="/all_campagne"><img src ="/images/cmpcn.svg" width="15%" />  Collectes de sang</a>
+  <a href="/blog"><img src ="/images/blogcn.svg" width="15%" />  Blog</a>
+  <a href="/contact"><img src ="/images/contactcn.svg" width="15%" />  Contact</a>
+
+  <div sec:authorize="isAnonymous()">
+    <a th:href="@{/logout}"><img src ="/images/logcn.svg" width="15%" />  Se connecter</a>
+  </div>
+  
+  <div sec:authorize="isAnonymous()">
+    <a th:href="@{/registerdonneur}"><img src ="/images/donorcn.svg" width="16%" /> Créer un compte <b>Donneur</b></a>
+  </div>
+
+  <div sec:authorize="isAnonymous()">
+    <a th:href="@{/registerhopital}"><img src ="/images/hoscn.svg" width="20%" /> Créer un compte <b>Hopital</b></a>
+  </div>
+
+  <div sec:authorize="isAuthenticated()">
+    <a th:href="@{/logout}"><img src ="/images/exit.svg" width="20%" /> Se déconnecter</a>
+  </div>
+</div>
+
+
+    
+ <div class="content">
+        <div class="table-wrapper">
+            <div class="table-title">
+                <div class="row">
+                    <div class="col-sm-8">
+      					<h2>Les collectes de sang et les centres de prélèvements fixes</h2>
+     				</div>
+     
+     				<div class="col-sm-4">
+      					<div sec:authorize="hasAuthority('ADMIN')">
+      						<a href="#addcampagne" class="btn btn-success" style="border-radius: 30px;" data-toggle="modal"><i class="material-icons">&#xE147;</i> 
+     						 Ajouter une nouvelle collecte de sang
+      						</a>     
+      					</div> 
+     				</div>
+                </div>  
+            </div>
+            
+            <div th:switch="${campagnes}">
+            	<h3 th:case="null">No campagnes yet!</h3>
+            	<div class="row" style="margin: 20px; ">
+            		<div class="col-xs-12 center-block text-center">
+     					<h4 style="font-weight: bolder;">Je me mobilise pour sauver des vies</h4>
+            			<h5 style="text-align: center;"> Actuellement il existe ou/et il aura lieu  
+          					<b><span th:text="${totalItems}"> </span></b> collectes de sang organisées par l'association Qatrat Hayat
+          				</h5>
+           			</div>
+        	  </div>
+              <div class="row">
+            	<div class="col-sm-3 border center" style=" margin-left: 55px; margin-bottom:15px;  border-radius: 20px;  width: 50%; padding: 10px;" th:each="campagne : ${campagnes}">
+            		<h5 class="nom" style="margin: 10px; font-weight: bolder;"><span th:text="${campagne.nom}"></span>
+            				<span class="dropdown dropright"> 
+    							<button type="button" class="btn btn-outline-light text-dark" data-toggle="dropdown"><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
+    								<div class="dropdown-menu">
+      									<a class="dropdown-item"  th:href="'mailto:?subject=Collecte de sang : ' + ${campagne.nom}  + '&body=Lieu : ' + ${campagne.lieu} + '%0A%0ATelephone : ' + ${campagne.telephone} + '%0A%0ADate: ' +${campagne.date} +'%0A%0ACet e-mail a été envoyé par Qatrat Hayat %0A%0A'">Envoyer les informations par mail</a>
+    								</div>
+    						</span>
+            			</h5>
+       			
+  					<ul style="list-style-type: none;">
+  						<li class="lieu"><i class="fa fa-map-marker-alt"  aria-hidden="true"></i><span th:text="${campagne.lieu}"></span></li>
+  					
+  						<li class="telephone"><i class="fa fa-phone"  aria-hidden="true"></i><span th:text="${campagne.telephone}"></span></li>
+  						<li class="date"><i class="fa fa-calendar-alt"  aria-hidden="true"></i><span th:text="${campagne.date}"></span></li>
+  						<li class="modifier" sec:authorize="hasAuthority('ADMIN')">
+							<a th:href="@{/editcampagne/{id_campagne}(id_campagne=${campagne.id_campagne})}" style=" border-radius: 80%" class="btn btn-info">
+						<i  class="fa fa-edit" style="margin: 0px; font-size:13px; color: white;" aria-hidden="true" data-toggle="tooltip" title="Modifier"></i></a>
+							<a href="" th:onclick="'javascript:confirmDelete(\''+ ${campagne.id_campagne} +'\');'" style=" border-radius: 80%" class="btn btn-danger" data-toggle="modal">
+  						<i  class="fa fa-trash" style="margin: 0px; color: white;" aria-hidden="true" data-toggle="tooltip" title="Supprimer"></i></a></li>	
+  					</ul>
+  				
+  				
+  				</div>
+            </div> 
+           <div class="row"> 
+           	<div class="col-sm-3">
+					<h5>
+						Page <b><span th:text="${pagenum}"></span></b>  sur <b><span th:text="${totalPages}"></span></b>
+					</h5>
+            	</div>
+    	 <nav class="pagination-container">
+			<div class="pagination"  >
+				<span class="pagination-inner" th:each="i: ${#numbers.sequence(1,totalPages)}">
+					<a  href="#" th:text="${i}" th:href="@{/all_campagne/{i}(i=${i})}"></a>
+				</span>	
+			</div>
+		</nav>
+		
+            
+            
+            	
+            </div>
+          </div>
+  	</div>
+  
+    <div class="d-none d-sm-block mb-5 pb-4">
+
+       
+       <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1XaNSxOIN3fPoYzBw7SRPu4Zn05FDDFhf" width="100%" height="480">
+    </iframe>
+
+      </div>
+ </div>
+    
+    
+    
+    
+ <!-- Ajouter une campagne -->
+ <div sec:authorize="hasAuthority('ADMIN')">
+  		<div id="addcampagne" class="modal fade" >
+  <div class="modal-dialog">
+   <div class="modal-content" style="border-radius: 20px;">
+    <form action="#" th:action="@{/addcampagne}" th:object="${campagne}" method="POST">
+     <div class="modal-header">      
+      <h4 class="modal-title">Ajouter une nouvelle campagne</h4>
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+     </div>
+     <div class="modal-body">     
+      <div class="form-group">
+       <label>Le nom de la campagne</label>
+       <input type="text" th:field="*{nom}" id="nom" placeholder="nom de la campagne" class="form-control" required>
+       <span th:if="${#fields.hasErrors('nom')}" th:errors="*{nom}"></span>
+      </div>
+      <div class="form-group">
+       <label>le Lieu de la campagne</label>
+       <input type="text" th:field="*{lieu}" id="lieu" placeholder="lieu de la campagne" class="form-control" required>
+       <span th:if="${#fields.hasErrors('lieu')}" th:errors="*{lieu}"></span>
+      </div>
+      <div class="form-group">
+       <label>Téléphone</label>
+       <input type="text" th:field="*{telephone}" id="telephone" placeholder="Téléphone" class="form-control" required>
+       <span th:if="${#fields.hasErrors('telephone')}" th:errors="*{telephone}"></span>
+      </div>
+      <div class="form-group">
+       <label>La Date de la campagne</label>
+       <input type="date" th:field="*{date}" id="date" placeholder="La date de la campagne" class="form-control" required>
+       <span th:if="${#fields.hasErrors('date')}" th:errors="*{date}"></span>
+      </div>     
+     </div>
+     <div class="modal-footer" style=": border-bottom-style: ridge;">
+      <input type="button" class="btn btn-default" data-dismiss="modal" value="Annuler">
+      <input type="submit" class="btn btn-success" value="Ajouter">
+     </div>
+    </form>
+   </div>
+  </div>
+ </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalTitle" aria-hidden="true" >
+  <div class="modal-dialog modal-dialog-centered" role="document" >
+    <div class="modal-content" style="border-radius: 20px;">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Confirmation de suppression</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Voulez-vous vraiment supprimer cette campagne de sensibilisation?
+        <input type="hidden" id="userIdHiddenInput" name="userIdHiddenInput"/>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+        <button type="button" class="btn btn-danger" th:onclick="deleteCampagne()">Oui, supprimer</button>
+      </div>
+    </div>
+  </div>
+</div>
+ 
+ 
+  <script type="text/javascript">
+function confirmDelete(id_campagne){
+	$('#deleteModal').modal('show');
+	$("#userIdHiddenInput").val(id_campagne);
+}
+
+function deleteCampagne(){
+	var id_campagne = $("#userIdHiddenInput").val();
+    window.location = '/deletecampagne/' + id_campagne ; 
+    
+}
+
+
+//add this js script into the web page,
+//you want reload once after first load
+window.onload = (function()
+			{
+		if( window.localStorage )
+		{
+			if( !localStorage.getItem( 'firstLoad' ) )
+			{
+			localStorage[ 'firstLoad' ] = true;
+			window.location.reload();
+			}  
+
+			else
+			localStorage.removeItem( 'firstLoad' );
+		}
+		})();
+		
+$('.pagination-inner a').on('click', function() {
+	$(this).siblings().removeClass('pagination-active');
+	$(this).addClass('pagination-active');
+})
+
+</script>
+ 
+    
+
+</body>
+</html>

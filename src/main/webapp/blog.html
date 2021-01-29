@@ -1,0 +1,549 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorator="layout/root_layout"
+      lang="fr">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Blog</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Merienda+One">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+     <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>QATRAT HAYAT</title>
+    <link rel="icon" href="img/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="css/all.css">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="css/flaticon.css">
+    <link rel="stylesheet" href="css/themify-icons.css">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="css/magnific-popup.css">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="css/slick.css">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style> 
+    
+   #scroll-btn{
+background-color: white;
+border: medium nome;
+border-radius: 30px;
+bottom: 20px;
+border-color : crimson;
+cursor: pointer;
+display: none;
+outline: medium none;
+padding: 10px 15px 7px;
+position: fixed;
+right: 30px;
+z-index: 99;
+}
+
+#scroll-btn:hover {
+  background-color: crimson;
+}
+.nav-link img {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    margin: -8px 0;
+    float: left;
+    margin-right: 10px;
+}   
+.navbar .nav-item i {
+    font-size: 18px;
+}
+.navbar .dropdown-item i {
+    font-size: 16px;
+    min-width: 22px;
+    
+}
+.navbar .nav-item.open > a {
+    background: none !important;
+}
+.navbar .dropdown-menu {
+    border-radius: 1px;
+    border-color: #e5e5e5;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+}
+.navbar .dropdown-menu a {
+    color:  #333;
+    padding: 8px 20px;
+    line-height: normal;
+}
+.navbar .dropdown-menu a:hover, .navbar .dropdown-menu a:active {
+    color: #333;
+}   
+.navbar .dropdown-item .material-icons {
+    font-size: 21px;
+    line-height: 16px;
+    vertical-align: middle;
+    margin-top: -2px;
+}   
+.navbar .active a, .navbar .active a:hover, .navbar .active a:focus {
+    background: transparent !important;
+}
+@media (min-width: 1200px){
+    .form-inline .input-group {
+        width: 300px;
+        margin-left: 30px;
+    }
+}
+@media (max-width: 1199px){
+    .form-inline {
+        display: block;
+        margin-bottom: 10px;
+    }
+    .input-group {
+        width: 100%;
+    }
+}
+</style>
+
+</head>
+
+<body>
+   
+  <!--::header part start::-->
+    <header class="main_menu">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand main_logo" href="home.html"> <img src="images/logo.jpg"  alt="logo"> </a>
+                        <a class="navbar-brand single_page_logo" href="index.html"> <img src="images/blodlogo 1.png"  alt="logo"> </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="home.html">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/all_annonce">Annonces</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/all_campagne">Compagnes</a>
+                                </li>
+                                 <li class="nav-item">
+                                   <a class="nav-link" href="/blog">Blog</a>
+                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/contact">Contact</a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                        
+                        <div class="nav_login">
+                        <ul>
+                        <li  style="display: inline-block;">
+                        <div sec:authorize="isAuthenticated()">
+                            <div class="navbar-nav ml-auto">
+                                <div class="nav-item dropdown">
+                                    <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle user-action"><img src="images/av.svg" class="avatar" alt="Avatar"> 
+                                    <span class="username" th:text="${#authentication.getPrincipal().getUsername()}" style="color :rgb(255, 106, 106);">Guest</span> <b class="caret"></b></a>
+                            <div class="dropdown-menu" style="border-radius: 10px;">
+                            <div class="dropdown-divider" ></div>
+                                <a th:href="@{/logout}" class="dropdown-item" ><i class="material-icons">&#xE8AC;</i> Logout</a>
+                            </div>
+                                </div>
+                            </div>
+                       </div>
+                        </li>
+                     
+                        <li style="display: inline-block;" >
+                        <div sec:authorize="isAnonymous()">
+                         <a th:href="@{/registerdonneur}" class="d-none d-sm-block btn_1 home_page_btn" >Sign up</a>
+                        </div>
+                    </li>
+                        <li style="display: inline-block;">
+                        <div sec:authorize="isAnonymous()"></div>
+                         <a th:href="@{/login}" class="d-none d-sm-block btn_1 home_page_btn" >Log in</a>
+                        
+                        </li>
+                    </ul>
+                </div>
+                    </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--::Header part end::-->
+    <!-- breadcrumb start-->
+    <section  class="breadcrumb breadcrumb_bg" style="background-image: url('images/cover.jpg'); background-repeat: no-repeat; margin: 100px 0;  background-size: 100% 500px; width: 100%">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner text-center">
+                        <div class="breadcrumb_iner_item">
+                            <h2 style="color: #4d4d4d;">our blog</h2>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+
+    <!--================Blog Area =================-->
+    <section class="blog_area section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mb-5 mb-lg-0">
+                    <div class="blog_left_sidebar">
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="images/donation.jpg" alt="">
+                                <div href="#" class="blog_item_date">
+                                    <h3>1</h3>
+                                    <p>Aout</p>
+                                </div>
+                            </div>
+
+                            <div class="blog_details">
+                                <div class="d-inline-block" href="single-blog.html">
+                                    <h2>Qui peut donner son sang ?</h2>
+                                </div>
+                                <p>Toutes les personnes âgées de 18 à 70 ans peuvent donner leur sang. Il suffit d'être en bonne santé et de ne pas avoir été dans une situation considérée comme à risques (voyages dans certains pays étrangers, rapports sexuels non protégés...) dans les mois précédant le don. Les soins dentaires et la prise de certains médicaments peuvent entraîner une contre-indication temporaire au don de sang.</p>
+                                
+                            </div>
+                        </article>
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="images/heart.jpg" alt="">
+                                <div href="#" class="blog_item_date">
+                                    <h3>27</h3>
+                                    <p>Juillet</p>
+                                </div>
+                            </div>
+
+                            <div class="blog_details">
+                                <div class="d-inline-block" href="single-blog.html">
+                                    <h2>Pourquoi devrais-je donner mon sang?</h2>
+                                    <h4>Le sang sécurisé permet de sauver des vies et d’améliorer la santé. Les transfusions sanguines sont nécessaires:</h4>
+
+                                    <ul class="a">
+                                        <li>Aux femmes présentant des complications de la grossesse, comme une grossesse extra-utérine ou une hémorragie avant, pendant ou après la naissance</li>
+                                        <li>Aux enfants souffrant d’anémie grave résultant souvent d’un paludisme ou de la malnutrition</li>
+                                        <li>Aux gens présentant un traumatisme grave suite à des catastrophes humaines ou naturelles</li>
+                                        <li>à de nombreux patients des services de chirurgie et de cancérologie</li>
+                                    </ul>
+
+                                    <p>Le sang est le don le plus précieux que l’on puisse faire à autrui – c’est un don de vie. En décidant de donner votre sang, vous pouvez sauver une vie, voire plusieurs si le sang est séparé en ses constituants – hématies, plaquettes et plasma – qui peuvent être utilisés séparément pour des patients présentant des affections particulières.</p>
+                                </div>
+                                
+                               
+                            </div>
+                        </article>
+
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="images/duree.png" alt="">
+                                <div href="#" class="blog_item_date">
+                                    <h3>2</h3>
+                                    <p>Juillet</p>
+                                </div>
+                            </div>
+
+                            <div class="blog_details">
+                                <div class="d-inline-block" href="single-blog.html">
+                                    <h2>Donner son sang, c'est simple et rapide !</h2>
+                                </div>
+                                <p>Quel que soit le lieu de la collecte (collecte mobile ou site fixe), le don de sang se déroule en quatre étapes:
+                                </p>
+                                    <h4><i class="fas fa-id-card-alt"></i> L'inscription administrative</h4>
+                                    <p>Cette première étape permet de recueillir les renseignements nécessaires pour constituer le dossier du donneur. Celui-ci doit se munir d'un document mentionnant son identité.</p>
+
+                                    <h4><i class="fas fa-file-medical"></i> L'entretien médical</h4>
+                                    <p>Confidentiel et couvert par le secret médical, l'entretien médical préalable constitue une des étapes capitales du processus de don de sang (ou de la sécurité transfusionnelle).
+
+                                    Donner son sang ne présente aucun risque si le donneur est reconnu apte au don. Par ses questions, le médecin cherche ainsi à déceler tous les éléments qui pourraient compromettre la santé du donneur (par exemple l'hypertension artérielle) et celle du receveur (risques de transmission d'une maladie infectieuse).</p>
+
+                                    <h4><i class="fas fa-briefcase-medical"></i> Le prélèvement</h4>
+                                    <p>À l'issue du contrôle d'hémoglobine et de l'entretien avec le médecin, le donneur, déclaré apte au don, passe dans la salle de prélèvements où il est pris en charge par le personnel infirmier. Celui-ci prélève quelques tubes échantillons sur lesquels seront effectués des analyses et des tests de dépistage. Il procède ensuite au prélèvement de sang lui-même (entre 400 et 450 ml)..</p>
+
+                                    <h4><i class="fas fa-pizza-slice"></i> Le temps du repos et de la collation</h4>
+                                    <p>Après le don, le donneur reste sous l'oeil vigilant des infirmières. Une collation lui est offerte avant de quitter le lieu de collecte. Il convient de respecter un délai de 8 semaines entre chaque don de sang total..</p>
+                                    
+
+                                
+                            </div>
+                        </article>
+
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="images/covid.jpg" alt="">
+                                <div href="#" class="blog_item_date">
+                                    <h3>7</h3>
+                                    <p>Juin</p>
+                                </div>
+                            </div>
+
+                            <div class="blog_details">
+                                <div class="d-inline-block" href="single-blog.html">
+                                    <i class="fas fa-bacteria"></i><h2>DON DE SANG ET CORONAVIRUS</h2>
+                                </div>
+                                <p><h3>Donnez votre plasma pour aider à lutter contre la maladie !</h3>
+Vous êtes guéri·e du COVID 19 ? Vous pouvez aider les patient·es toujours atteint·es par la maladie en donnant votre plasma.</p>
+<p>Il est toujours possible de donner son sang pendant le confinement. C’est même essentiel pour éviter un manque de produits sanguins qui pourrait être fatal aux patients qui en dépendent, La relation don de sang-contamination au covid-19 n’a jamais été établie, beaucoup de messages ont été lancés pour rassurer qu’il n’y a aucun risque à donner son sang en ces temps d’épidémie.</p>
+                                
+                            </div>
+                        </article>
+
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="images/girldon.gif" alt="">
+                                <div href="#" class="blog_item_date">
+                                    <h3>15</h3>
+                                    <p>Mai</p>
+                                </div>
+                            </div>
+
+                            <div class="blog_details">
+                                <div class="d-inline-block" href="single-blog.html">
+                                    <h2>Donner son sang est bon pour la santé</h2>
+                                </div>
+                                <p>Pour bien fonctionner, le cœur a besoin d’un certain débit et volume sanguin. D’après le site Blood Flow Online, donner son sang régulièrement aide à réduire l’épaisseur du sang et lui permet de s’écouler plus facilement dans les vaisseaux sanguins pour atteindre le cœur. Donner son sang peut réduire aussi le risque de développer certains cancers. En effet, le don contribue à réduire les réserves de fer (c’est pourquoi les anémiques ne peuvent pas donner) et réduit ainsi la quantité de dommages causés par les radicaux libres dans le corps..</p>
+                                
+                            </div>
+                        </article>
+
+                        
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog_right_sidebar">
+                        
+
+                        
+                        <aside class="single_sidebar_widget tag_cloud_widget">
+                            <h4 class="widget_title"><span><i class="fas fa-hashtag"></i> Tag Don de Sang</span></h4>
+                            <ul class="list">
+                                <li>
+                                    <a href="#">#Solidarité</a>
+                                </li>
+                                <li>
+                                    <a href="#">#santé</a>
+                                </li>
+                                <li>
+                                    <a href="#">#dondesang</a>
+                                </li>
+                                <li>
+                                    <a href="#">#Volontariat</a>
+                                </li>
+                                <li>
+                                    <a href="#">#Savelife</a>
+                                </li>
+                                <li>
+                                    <a href="#">#jesauveunevie</a>
+                                </li>
+                           
+                            </ul>
+                        </aside>
+
+
+                        <aside class="single_sidebar_widget instagram_feeds">
+                            <h4 class="widget_title"><span><i class="fas fa-images"></i> Images des campagnes de sensibilisation</span></h4>
+                            <ul class="instagram_row flex-wrap">
+                                <li>
+                                    <a href="#">
+                                        <img class="img-fluid" src="images/donner1.jpg" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img-fluid" src="images/donner2.jpg" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img-fluid" src="images/donner3.jpg" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img-fluid" src="images/donner4.jpg" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img-fluid" src="images/donner5.jpg" alt="">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img class="img-fluid" src="images/donner6.jpeg" alt="">
+                                    </a>
+                                </li>
+                            </ul>
+                        </aside>
+
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--================Blog Area =================-->
+
+    <!--::footer_part start::-->
+    <footer class="footer_part">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-4 col-lg-4">
+                    <div class="single_footer_part">
+                        <a href="html.html" class="footer_logo_iner"> <img src="images/blodlogo.png" alt="#"> </a>
+                        <p>Aux urgences, certaines victimes arrivent dans un état critique et ont perdu beaucoup de sang. 
+                            Et comme aucun produit artificiel ne peut remplacer le sang humain,
+                             la seule solution pour sauver ces personnes est la transfusion sanguine, grâce au sang des donneurs compatibles
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>Qui Sommes-Nous?</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="">À propos de nous</a></li>
+                            <li><a href="">Ils ont collaboré avec PasseportSanté </a></li>
+                            <li><a href="">Notre Equipe</a></li>
+                            <li><a href="">Le But De Qatrat Hayat</a></li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>Liens Rapide</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="home.html">Home</a></li>
+                            <li><a href="annonce.html">Annonce</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                            <li><a href="compagne.html">Compagne</a></li>
+                            <li><a href="blog.html">Blog</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>INFORMATIONS LÉGALES</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="">conditions de service</a></li>
+                            <li><a href="">Gestion des Cookies</a></li>
+                            <li><a href="">charte-confidentialite</a></li>
+                            <li><a href="">Les Termes d'utilisation</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>DES QUESTIONS ?</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="">État de santé Pour Pouvoire Donner Du Sang</a></li>
+                            <li><a href="">Pesez-vous moins de 50 kg ?</a></li>
+                            <li><a href="">Avez-vous été vacciné(e) ?</a></li>
+                            <li><a href="">Êtes-vous allé(e) chez le dentiste dans les 7 derniers jours ?</a></li>
+                            <li><a href="">Avez-vous déjà été opéré(e) ou hospitalisé(e) ?</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="copyright_text">
+                        <P><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+<script>document.write(new Date().getFullYear());</script> toutes les droites reservées | Creer  <i class="ti-heart" aria-hidden="true"></i> par HORA</P>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="footer_icon social_icon">
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
+                            <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--::footer_part end::-->
+    
+     <button onclick="scrollToTop()" id="scroll-btn" title="vers le haut"><img src="img/up-arrow.png"  width="25px" height= "25px"  ></button>
+    
+  <script>
+// When the user scrolls down 20px from the top of the document,we will show the button
+window.onscroll = function()
+{
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20)
+{
+document.getElementById("scroll-btn").style.display = "block";
+}
+else
+{
+document.getElementById("scroll-btn").style.display = "none";
+}
+};
+
+function scrollToTop()
+{
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    
+        <!-- jquery plugins here-->
+        <script src="js/jquery-1.12.1.min.js"></script>
+        <!-- popper js -->
+        <script src="js/popper.min.js"></script>
+        <!-- bootstrap js -->
+        <script src="js/bootstrap.min.js"></script>
+        <!-- easing js -->
+        <script src="js/jquery.magnific-popup.js"></script>
+        <!-- swiper js -->
+        <script src="js/swiper.min.js"></script>
+        <!-- swiper js -->
+        <script src="js/masonry.pkgd.js"></script>
+        <!-- particles js -->
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/jquery.nice-select.min.js"></script>
+        <!-- slick js -->
+        <script src="js/slick.min.js"></script>
+        <script src="js/jquery.counterup.min.js"></script>
+        <script src="js/waypoints.min.js"></script>
+        <script src="js/contact.js"></script>
+        <script src="js/jquery.ajaxchimp.min.js"></script>
+        <script src="js/jquery.form.js"></script>
+        <script src="js/jquery.validate.min.js"></script>
+        <script src="js/mail-script.js"></script>
+        <!-- custom js -->
+        <script src="js/custom.js"></script>
+    </body>
+    
+    </html>

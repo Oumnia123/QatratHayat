@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Registration Form</title>
+<!-- link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" /-->
+<<meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Création d'un nouveau compte admin</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Main css -->
+    <link rel="icon" href="img/favicon.png">
+    <link rel="stylesheet" href="css/css/style.css">
+    
+<style>
+#message {
+  display:none;
+  background: #d9edf7;
+  color: #000;
+  position: relative;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+#message p {
+  padding: 10px 35px;
+  
+}
+
+/* Add a green text color and a checkmark when the requirements are right */
+.valid {
+  color: #4f8a10;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+}
+
+/* Add a red text color and an "x" when the requirements are wrong */
+.invalid {
+  color: #d8000c;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}
+</style>
+</head>
+<body>
+ <!--::header part start::-->
+   
+    <!--::Header part end::-->
+	 <div class="main">
+    <!--::Header part end::-->
+      <!-- Sign up form -->
+        
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Création d'un nouveau compte Administrateur</h2>
+			            <form autocomplete="off" action="#" th:action="@{/registeradmin}" th:object="${admin}" method="post" class="register-form" id="register-form" >
+                            <div class="form-group">
+                                <label for="nom"><i class="zmdi zmdi-account material-icons-name"></i></label>
+						<input  type="text" th:field="*{nom}" id="nom" name="nom" placeholder="Nom"  required/>
+                            </div>
+                            <div class="form-group">
+                                <label for="prenom"><i class="zmdi zmdi-account material-icons-name"></i></label>
+						<input type="text" th:field="*{prenom}" id="prenom" name="prenom" placeholder="Prénom" required />
+                            </div>
+                            <div class="form-group">
+                                <label for="username"><i class="zmdi zmdi-account-circle"></i></label>
+						<input type="text" th:field="*{username}" id="username" name="username" placeholder="Nom d’utilisateur" required/>
+                            </div>
+                             <div class="form-group">
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" th:field="*{password}" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"  
+                                title="le mot de passe doit contenir au moins une lettre majuscule, une lettre miniscule, un chiffre, et au moins 8 caractères ou plus "
+                                placeholder="Mot de passe" required/>
+            
+                                
+                            </div>
+                            <ul class="text-left"
+                                        th:each="error: ${#fields.errors('password')}">
+                                        <li th:each="message : ${error.split(',')}">
+                                            <p class="error-message"
+                                               th:text="${message}" style="color: #f1524e;"></p>
+                                        </li >
+                             </ul>
+                             <div id="message">
+ 									 <h5>Le mot de passe doit contenir les éléments suivants:</h5>
+  									<p id="letter" class="invalid">Une lettre <b>miniscule</b> </p>
+  									<p id="capital" class="invalid">Une lettre <b>majuscule </b></p>
+  									<p id="number" class="invalid"><b>Un chiffre</b></p>
+ 									 <p id="length" class="invalid">Minimum <b>8 caractères</b></p>
+							</div>
+                            
+                            
+                             <div class="form-group">
+                             	<label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" id="txtConfirmPassword" placeholder="Comfirmer mot de passe" name="confpass" >
+                            </div>
+                          
+                            <div class="form-group">
+                            
+                                <div class="registrationFormAlert" id="CheckPasswordMatch">
+                                </div>
+                            </div>
+                             <div class="form-group" >
+                             	<div class="checkbox" style=" margin-bottom : 50px !important;margin-top : 30px !important;width : 300px !important,height : 300px !important" >
+      								<label style="font-size:14px !important;"><input  id="myCheck" type="checkbox" onchange="myFunction()" name="myCheck" required>
+      								J'accepte 
+      									<a href="https://drive.google.com/file/d/1a5U_tbgBWyXRbX6fJ0qIKUukuJkp160N/view?usp=sharing" 
+      										target="_blank">
+      										les conditions de service
+      									</a>
+      								et  <a href="https://drive.google.com/file/d/1-AV0gXvWGELTGf0otvC3q0ADARz9fJUh/view?usp=sharing" target="_blank">
+      								les termes d'utilisation</a>
+      								</label>
+    							</div>
+    						</div>
+    						<div class="form-group">
+                            
+                                <h5 style="font-weight: bolder;color:crimson;" class="Conditions" id="Conditions">
+                                
+                                </h5>
+                                
+                            </div>
+    						
+                            <div class="form-group form-button">
+								<button type="submit" onclick="myFunction()" class="btn btn-primary btn-block">Créer</button>                           
+							 </div>
+							 <div class="alert alert-danger" th:if="${ adminExiste != null}">
+  								<strong th:utext="${adminExiste}"></strong> 
+							</div>
+							<div class="alert alert-success" th:if="${ successMessage != null}">
+ 								 <strong th:utext="${successMessage}"></strong> Vous pouvez maintenenant:  <a href="/login" class="alert-link">Se connecter</a>.
+							</div>
+							 <div class="alert alert-danger" th:if="${ erreurs != null}">
+  								<strong th:utext="${erreurs}"></strong> 
+							</div>
+							 	
+				<div class="alert alert-success alert-dismissible col-sm-12"
+					th:if="${(bindingResult != null && bindingResult.getAllErrors() != null)}">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-hidden="true">×</button>
+					<ul th:each="data : ${bindingResult.getAllErrors()}">
+						<li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>
+					</ul>
+				</div>
+	
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="images/regist.jpg" alt="sing up image"></figure>
+                        <a href="/login" class="signup-image-link">Je suis déjà un membre</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+         </div>
+         <script src="vendor/jquery/jquery.min.js"></script>
+			  <script src="js/main.js"></script>
+			  
+
+ 
+ <script type="text/javascript">
+ 
+ var myInput = document.getElementById("psw");
+ var letter = document.getElementById("letter");
+ var capital = document.getElementById("capital");
+ var number = document.getElementById("number");
+ var length = document.getElementById("length");
+
+ // When the user clicks on the password field, show the message box
+ myInput.onfocus = function() {
+   document.getElementById("message").style.display = "block";
+ }
+
+ // When the user clicks outside of the password field, hide the message box
+ myInput.onblur = function() {
+   document.getElementById("message").style.display = "none";
+ }
+
+ // When the user starts to type something inside the password field
+ myInput.onkeyup = function() {
+   // Validate lowercase letters
+   var lowerCaseLetters = /[a-z]/g;
+   if(myInput.value.match(lowerCaseLetters)) {  
+     letter.classList.remove("invalid");
+     letter.classList.add("valid");
+   } else {
+     letter.classList.remove("valid");
+     letter.classList.add("invalid");
+   }
+   
+   // Validate capital letters
+   var upperCaseLetters = /[A-Z]/g;
+   if(myInput.value.match(upperCaseLetters)) {  
+     capital.classList.remove("invalid");
+     capital.classList.add("valid");
+   } else {
+     capital.classList.remove("valid");
+     capital.classList.add("invalid");
+   }
+
+   // Validate numbers
+   var numbers = /[0-9]/g;
+   if(myInput.value.match(numbers)) {  
+     number.classList.remove("invalid");
+     number.classList.add("valid");
+   } else {
+     number.classList.remove("valid");
+     number.classList.add("invalid");
+   }
+   
+   // Validate length
+   if(myInput.value.length >= 8) {
+     length.classList.remove("invalid");
+     length.classList.add("valid");
+   } else {
+     length.classList.remove("valid");
+     length.classList.add("invalid");
+   }
+ }
+ 
+ function checkPasswordMatch() {
+     var password = $("#psw").val();
+     var confirmPassword = $("#txtConfirmPassword").val();
+     if (password != confirmPassword)
+         $("#CheckPasswordMatch").html("Les mots de passe saisis ne sont pas identiques!").css("color", "red");
+     else
+         $("#CheckPasswordMatch").html("Les mots de passe saisis sont identiques.").css("color", "green");
+ }
+ $(document).ready(function () {
+    $("#txtConfirmPassword").keyup(checkPasswordMatch);
+ });
+ 
+ function myFunction() {
+	   if (document.getElementById('myCheck').checked ) {
+		   $("#Conditions").html("En créant ce compte, vous acceptez nos conditions de service et nos termes d'utilisation").css("color", "green");
+		   
+	   }
+	   else {
+		   $("#Conditions").html("Il faut accepter les conditions de service et les termes d'utilisation pour continuer").css("color", "crimson");
+		   
+	   }
+	   
+	 }
+ 
+ </script>
+
+</body>
+</html>

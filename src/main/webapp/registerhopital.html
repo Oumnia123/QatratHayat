@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Registration Form</title>
+ <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Création d'un nouveau compte Hopital</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/css/style.css">
+</head>
+<body>
+ <!--::header part start::-->
+ 
+  <div class="main">
+    <!--::Header part end::-->
+      <!-- Sign up form -->
+        
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Création d'un nouveau compte Hopital</h2>
+			            <form autocomplete="off" action="#" th:action="@{/registerhopital}" th:object="${hopital}" method="post" class="register-form" id="register-form" >
+                            <div class="form-group">
+                                <label for="nom_hopital"><i class="zmdi zmdi-account material-icons-name"></i></label>
+						<input type="text" th:field="*{nom_hopital}" id="nom_hopital" name="nom_hopital" placeholder="Le nom de l'hopital"  />
+                            </div>
+                            <div class="form-group">
+                                <label for="n_tele"><i class="zmdi zmdi-account material-icons-name"></i></label>
+						<input type="tel" th:field="*{n_tele}" id="n_tele" name="n_tele" placeholder="Numéro de téléphone"  />
+                            </div>
+                            <div class="form-group">
+                                <label for="lieu_hopital"><i class="zmdi zmdi-email"></i></label>
+						<input type="text" th:field="*{lieu_hopital}" id="lieu_hopital" name="lieu_hopital" placeholder="le lieu de l'hopital" />
+                            </div>
+                            <div class="form-group">
+                                <label for="username"><i class="zmdi zmdi-lock"></i></label>
+						<input type="text" th:field="*{username}" id="email" name="username" placeholder="username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="password"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input type="password" th:field="*{password}" id="password"  name="password" placeholder="Mot de passe"/>
+                            </div>
+                            
+                            <div class="form-group form-button">
+								<button type="submit" class="btn btn-primary btn-block">Création du compte</button>                           
+							 </div>
+							 	<span th:utext="${successMessage}"></span>
+				<div class="alert alert-success alert-dismissible col-sm-12"
+					th:if="${(bindingResult != null && bindingResult.getAllErrors() != null)}">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-hidden="true">×</button>
+					<ul th:each="data : ${bindingResult.getAllErrors()}">
+						<li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>
+					</ul>
+				</div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="images/HOP.svg" alt="sing up image"></figure>
+                        <a href="/login" class="signup-image-link">I am already member</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+         </div>
+         <script src="vendor/jquery/jquery.min.js"></script>
+			  <script src="js/main.js"></script>
+        <!-- Sing in  Form
+    
+	 <section class="pricing_part section_padding home_page_pricing">
+        <div class="container">
+            <div class="row justify-content-center">
+	
+	<div style="background-color: #337ab7; height: 50px;"></div>
+	<div class="container-fluid" style="margin-top: 30px;">
+
+		<div class="row col-lg-4 col-lg-offset-4" style="margin-top: 40px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
+			<form autocomplete="off" action="#" th:action="@{/registerhopital}" th:object="${hopital}" method="post" class="form-signin" role="form">
+				<h3 class="form-signin-heading">Registration Form</h3>
+				<div class="form-group">
+					<div class="">
+						<input type="text" th:field="*{nom_hopital}" placeholder="Name" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<input type="text" th:field="*{lieu_hopital}" placeholder="lieu_hopital" class="form-control" />
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<div class="">
+						<input type="text" th:field="*{email}" placeholder="Email" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<input type="password" th:field="*{password}" placeholder="Password" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<button type="submit" class="btn btn-primary btn-block">Register User</button>
+					</div>
+				</div>
+				<span th:utext="${successMessage}"></span>
+				<div class="alert alert-success alert-dismissible col-sm-12"
+					th:if="${(bindingResult != null && bindingResult.getAllErrors() != null)}">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-hidden="true">×</button>
+					<ul th:each="data : ${bindingResult.getAllErrors()}">
+						<li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>
+					</ul>
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+	</div>
+	</section>
+	 -->
+	 <!--::footer_part start::
+    <footer class="footer_part">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-md-4 col-lg-4">
+                    <div class="single_footer_part">
+                        <a href="index.html" class="footer_logo_iner"> <img src="img/footer_logo.png" alt="#"> </a>
+                        <p>Gathered. Under is whose you'll to make years is mat lights thing together fish made
+                            forth thirds cattle behold won't. Fourth creeping first female.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>About Us</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="">Managed Website</a></li>
+                            <li><a href="">Manage Reputation</a></li>
+                            <li><a href="">Power Tools</a></li>
+                            <li><a href="">Marketing Service</a></li>
+                            <li><a href="">Customer Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>Quick Links</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="">Store Hours</a></li>
+                            <li><a href="">Brand Assets</a></li>
+                            <li><a href="">Investor Relations</a></li>
+                            <li><a href="">Terms of Service</a></li>
+                            <li><a href="">Privacy & Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>My Account</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="">Press Inquiries</a></li>
+                            <li><a href="">Media Directories</a></li>
+                            <li><a href="">Investor Relations</a></li>
+                            <li><a href="">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-4 col-md-3 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>Resources</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="">Application Security</a></li>
+                            <li><a href="">Software Policy</a></li>
+                            <li><a href="">Supply Chain</a></li>
+                            <li><a href="">Agencies Relation</a></li>
+                            <li><a href="">Manage Reputation</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="copyright_text">
+                        
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. </P>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="footer_icon social_icon">
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="single_social_icon"><i class="fab fa-facebook-f"></i></a></li>
+                            <li><a href="#" class="single_social_icon"><i class="fab fa-twitter"></i></a></li>
+                            <li><a href="#" class="single_social_icon"><i class="fas fa-globe"></i></a></li>
+                            <li><a href="#" class="single_social_icon"><i class="fab fa-behance"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+ :-->
+</body>
+</html>

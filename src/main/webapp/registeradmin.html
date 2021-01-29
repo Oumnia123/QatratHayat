@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Registration Form</title>
+<!-- link rel="stylesheet" type="text/css" th:href="@{/css/registration.css}" /-->
+<<meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Création d'un nouveau compte admin</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Main css -->
+    <link rel="stylesheet" href="css/css/style.css">
+</head>
+<body>
+ <!--::header part start::-->
+   
+    <!--::Header part end::-->
+	 <div class="main">
+    <!--::Header part end::-->
+      <!-- Sign up form -->
+        
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Création d'un nouveau compte Admin</h2>
+			            <form autocomplete="off" action="#" th:action="@{/registeradmin}" th:object="${admin}" method="post" class="register-form" id="register-form" >
+                            <div class="form-group">
+                                <label for="nom"><i class="zmdi zmdi-account material-icons-name"></i></label>
+						<input  type="text" th:field="*{nom}" id="nom" name="nom" placeholder="nom"  />
+                            </div>
+                            <div class="form-group">
+                                <label for="prenom"><i class="zmdi zmdi-account material-icons-name"></i></label>
+						<input type="text" th:field="*{prenom}" id="prenom" name="prenom" placeholder="prenom" />
+                            </div>
+                            <div class="form-group">
+                                <label for="username"><i class="zmdi zmdi-email"></i></label>
+						<input type="text" th:field="*{username}" id="username" name="username" placeholder="username" />
+                            </div>
+                            <div class="form-group">
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" th:field="*{password}" id="password"  name="password" placeholder="password"/>
+                            </div>
+                            
+                            <div class="form-group form-button">
+								<button type="submit" class="btn btn-primary btn-block">Register Admin</button>                           
+							 </div>
+							 	<span th:utext="${successMessage}"></span>
+				<div class="alert alert-success alert-dismissible col-sm-12"
+					th:if="${(bindingResult != null && bindingResult.getAllErrors() != null)}">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-hidden="true">×</button>
+					<ul th:each="data : ${bindingResult.getAllErrors()}">
+						<li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>
+					</ul>
+				</div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="images/regist.jpg" alt="sing up image"></figure>
+                        <a href="/login" class="signup-image-link">I am already member</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+         </div>
+         <script src="vendor/jquery/jquery.min.js"></script>
+			  <script src="js/main.js"></script>
+			  
+	<!--
+	<div style="background-color: #337ab7; height: 50px;"></div>
+	<div class="container-fluid" style="margin-top: 30px;">
+
+		<div class="row col-lg-4 col-lg-offset-4" style="margin-top: 40px; background-color: #fff; padding: 20px; border: solid 1px #ddd;">
+			<form autocomplete="off" action="#" th:action="@{/registerdonneur}" th:object="${donneur}" method="post" class="form-signin" role="form">
+				<h3 class="form-signin-heading">Registration Form</h3>
+				<div class="form-group">
+					<div class="">
+						<input type="text" th:field="*{first_name}" placeholder="Name" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<input type="text" th:field="*{lastName}" placeholder="Last Name" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<input type="text" th:field="*{grp_s}" placeholder="groupe sanguin" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<input type="date" th:field="*{date_der_don}" placeholder="Date dernier don" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<input type="text" th:field="*{email}" placeholder="Email" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<input type="password" th:field="*{password}" placeholder="Password" class="form-control" />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="">
+						<button type="submit" class="btn btn-primary btn-block">Register User</button>
+					</div>
+				</div>
+				<span th:utext="${successMessage}"></span>
+				<div class="alert alert-success alert-dismissible col-sm-12"
+					th:if="${(bindingResult != null && bindingResult.getAllErrors() != null)}">
+					<button type="button" class="close" data-dismiss="alert"
+						aria-hidden="true">×</button>
+					<ul th:each="data : ${bindingResult.getAllErrors()}">
+						<li th:text="${data.getObjectName() + ' :: ' + data.getDefaultMessage()}"></li>
+					</ul>
+				</div>
+			</form>
+		</div>
+	</div>
+	-->
+	 <!--::footer_part start::-->
+   
+</body>
+</html>

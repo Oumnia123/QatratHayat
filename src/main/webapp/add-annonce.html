@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<form action="#" th:action="@{/addannonce}" th:object="${annonce}" method="post">
+    <label for="titre">titre</label>
+    <input type="text" th:field="** {titre}" id="titre" placeholder="titre">
+    <span th:if="${#fields.hasErrors('titre')}" th:errors="** {titre}"></span>
+    <label for="contenu_annonce">contenu_annonce</label>
+    <input type="text" th:field="** {contenu_annonce}" id="contenu_annonce" placeholder="contenu_annonce">
+    <span th:if="${#fields.hasErrors('contenu_annonce')}" th:errors="** {contenu_annonce}"></span>
+    <input type="submit" value="Add Annonce">
+</form>
+</body>
+</html>
